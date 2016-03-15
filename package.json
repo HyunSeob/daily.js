@@ -1,0 +1,24 @@
+{
+  "name": "daily.js",
+  "version": "0.0.1",
+  "description": "A code repository for daily javascript life.",
+  "main": "index.js",
+  "dependencies": {
+    "lodash": "^4.6.1",
+    "q": "^1.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HyunSeob/daily.js.git"
+  },
+  "author": "HyunSeob <sytte1017@gmail.com> (http://hyunseob.github.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HyunSeob/daily.js/issues"
+  },
+  "homepage": "https://github.com/HyunSeob/daily.js#readme"
+}
