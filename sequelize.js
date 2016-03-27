@@ -1,3 +1,7 @@
+/* 이 코드는 블로그 포스팅에 사용된 예제 코드입니다.
+** 포스트 주소: http://hyunseob.github.io/2016/03/27/usage-of-sequelize-js/
+*/
+
 'use strict';
 
 const Sequelize = require('sequelize');
