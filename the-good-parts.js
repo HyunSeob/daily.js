@@ -86,3 +86,70 @@ var tryIt = function () {
 }
 
 tryIt();
+
+// 07: Prototype Method
+
+Function.prototype.method = function(name, func) {
+  if (!this.prototype[name]) {
+    this.prototype[name] = func;
+  }
+  return this;
+}
+
+Number.method('integer', function() {
+  return Math[this < 0 ? 'ceiling' : 'floor'](this);
+});
+
+console.log((-10 / 3).integer());
+
+String.method('trim', function() {
+  return this.replace(/^\s+|\s+$/g, '');
+});
+
+console.log('"' + ' neat '.trim() + '"');
+
+// 08: Recursive Call
+
+var hanoi = function(disc, src, aux, dst) {
+  if (disc > 0) {
+    hanoi(disc - 1, src, dst, aux);
+    console.log('Move disc ' + disc + ' from ' + src ' to ' + dst);
+    hanoi(disc - 1, aux, src, dst);
+  }
+}
+
+hanoi(3, 'Src', 'Aux', 'Dst');
+
+var walkTheDOM = function walk(node, func) {
+  func(node);
+  node = node.firstChild;
+  while (node) {
+    walk(node, func);
+    node = node.nextSibling;
+  }
+};
+
+var getElementsByAttribute = function (att, value) {
+  var results = [];
+
+  walkTheDOM(document.body, function(node) {
+    var actual = node.nodeType === 1 && node.getAttribute(att);
+    if (typeof actual === 'string' &&
+      (actual === value || typeof value !== 'string')
+    ) {
+      results.push(node);
+    }
+  });
+
+  return results;
+}
+
+var factorial = function(i, a) {
+  a = a || 1;
+  if (i < 2) {
+    return a;
+  }
+  return factorial(i - 1, a * i);
+}
+
+console.log(factorial(4));
