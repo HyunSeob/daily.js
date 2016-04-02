@@ -164,3 +164,65 @@ var foo = function() {
   };
   bar();
 };
+
+// 10: Closure
+
+var myObject = function() {
+  var value = 0;
+
+  return {
+    increment: function(inc) {
+      value += typeof inc === 'number' ? inc : 1;
+    },
+    getValue: function() {
+      return value;
+    }
+  };
+};
+
+var quo = function(status) {
+  var _status = status;
+  return {
+  	getStatus: function() {
+			return _status;
+    }
+  };
+};
+
+var myQuo = quo('amazed');
+document.body.innerHTML = myQuo.getStatus();
+
+var fade = function(node) {
+	var level = 1;
+  var step = function() {
+  	var hex = level.toString(16);
+		node.style.backgroundColor = '#FFFF' + hex + hex;
+    if (level < 15) {
+			level += 1;
+      setTimeout(step, 100);
+    }
+  };
+  step();
+};
+
+fade(document.body);
+
+// Bad example
+var addTheHandlers = function(nodes) {
+	var i;
+	for (i = 0; i < nodes.length; i += 1) {
+  	nodes[i].onclick = function(e) {
+			console.log(i);
+    };
+  }
+};
+
+// Better example
+var addTheHandlers = function(nodes) {
+	var i;
+  for (i = 0; i < nodes.length; i += 1) {
+  	nodes[i].onclick = function(i) {
+    	return function(e) { console.log(i) };
+    }(i);
+  }
+};
