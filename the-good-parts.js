@@ -226,3 +226,46 @@ var addTheHandlers = function(nodes) {
     }(i);
   }
 };
+
+// 12: Module
+
+String.method('deentityify', function() {
+  var entity = {
+    quot = '"',
+    lt: '<',
+    gt: '>'
+  };
+
+  return function() {
+    return this.replace(/&([^&;]+);/g, function(a, b) {
+      var r = entity[b];
+      return typeof r === 'string' ? r : a;
+    });
+  };
+});
+
+console.log('&lt;&quot;&gt;'.deentityify());
+
+var serialMaker = function() {
+  var prefix = '';
+  var seq = 0;
+  return {
+    setPrefix: function(p) {
+      prefix = String(p);
+    },
+    setSeq: function(s) {
+      seq = s;
+    },
+    gensym: function() {
+      var result = prefix + seq;
+      seq += 1;
+      return result;
+    }
+  };
+};
+
+var seqer = serialMaker();
+seqer.setPrefix('Q');
+seqer.setSeq(1000);
+
+var unique = seqer.gensyn();
