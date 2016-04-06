@@ -11,6 +11,7 @@ Stack.prototype.size = function() {
 }
 
 Stack.prototype.top = function() {
+  if (this.isEmpty()) throw new Error('Stack is empty.');
   return this._stack[this.size() - 1];
 }
 
