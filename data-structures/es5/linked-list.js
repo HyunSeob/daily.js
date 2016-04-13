@@ -4,15 +4,28 @@ function Node(data) {
 }
 
 Node.prototype.getData = function() {
-  return data;
+  return this._data;
 };
 
 Node.prototype.getNext = function() {
-  return next;
+  return this._next;
 };
 
 Node.prototype.setNext = function(node) {
   this._next = node;
+};
+
+function Iterator(start) {
+  this._curr = start;
+}
+
+Iterator.prototype.next = function() {
+  this._curr = this._curr.getNext();
+  return this._curr.getData();
+};
+
+Iterator.prototype.hasNext = function() {
+  return this._curr.getNext() !== null;
 };
 
 function LinkedList() {
@@ -27,13 +40,21 @@ LinkedList.prototype.isEmpty = function() {
 LinkedList.prototype.pushBack = function(data) {
   var node = new Node(data);
   if (!this._head) this._head = node;
-  if (!this._tail) this._tail = node;
-  else this._tail.setNext(node);
+  if (this._tail) this._tail.setNext(node);
+  this._tail = node;
+};
+
+LinkedList.prototype.get = function(index) {
+  var curr = this._head;
+  while (index--) {
+    curr = curr.getNext();
+  }
+  return curr.getData();
 };
 
 LinkedList.prototype.indexOf = function(data) {
   if (this.isEmpty()) throw new Error('List is empty.');
-  
+
   var curr = this._head;
   var index = 0;
 
@@ -65,3 +86,9 @@ LinkedList.prototype.remove = function(data) {
 
   return false;
 }
+
+LinkedList.prototype.getIterator = function() {
+  return new Iterator(this._head);
+};
+
+module.exports = LinkedList;
