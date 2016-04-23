@@ -4,10 +4,11 @@
   "description": "A code repository for daily javascript life.",
   "main": "index.js",
   "dependencies": {
-    "lodash": "^4.6.1",
+    "lodash": "^4.11.1",
     "mysql": "^2.10.2",
     "q": "^1.4.1",
-    "sequelize": "^3.20.0"
+    "sequelize": "^3.20.0",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {},
   "scripts": {
